@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: '神盾局特工管理系统',
+  title: '物业集团大模型开发',
 
   /**
    * @type {boolean} true | false

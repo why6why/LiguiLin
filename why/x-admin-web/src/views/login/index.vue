@@ -3,7 +3,7 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">欢迎使用神盾局特工管理系统</h3>
+        <h3 class="title">物业集团大模型开发</h3>
       </div>
 
       <el-form-item prop="username">
@@ -189,8 +189,8 @@ $light_gray:#eee;
   background-color: $bg;
   overflow: hidden;
 
-  background-image: url('../../assets/bg.jpg');
-  background-size: 100%;
+  background-image: url('../../assets/bg.png');
+  background-size: 100% 100%;
 
   display: flex;
   align-items: center;

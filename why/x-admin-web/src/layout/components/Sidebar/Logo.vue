@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      title: '神盾局特工管理系统',
+      title: '物业集团大模型开发',
       logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
     }
   }

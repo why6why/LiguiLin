@@ -1,4 +1,6 @@
 import request from '@/utils/request'
+import * as fs from 'fs'
+
 
 export default{
   getUserList(searchModel){
@@ -15,8 +17,10 @@ export default{
   },
  async bigModel(searchModel){
     console.log("why data")
-    console.log(searchModel)
-    const res = await request({
+    // console.log(searchModel)
+
+    
+    const res = request({
       url: '/v1/chat/completions',
       method: 'post',
       data: {
