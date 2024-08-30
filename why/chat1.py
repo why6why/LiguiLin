@@ -1,27 +1,68 @@
 import requests
-url = "https://aiapi.jinbizhihui.com:20000/v1/chat/completions"
-headers = {
-    "Content-Type": "application/json",
-    "Authorization": "Bearer your_token"
-}
-payload = {
-    "model": "cele/Cele-72B-Chat-GPTQ-Int4",
-    "messages": [
-        {
-            "role": "system",
-            "content": "你是一个商品类目预测专家，对输入的内容，进行商品类目预测，类目包含'大家电、全屋家具、营养保健、茶饮冲调、休闲零食、生鲜水果、肉禽蛋品、粮油调味、中外名酒、家居用品、当地玩乐、旅游酒店、智能锁、华帝电器专场、生活电器、厨房电器、空调'。返回商品的分类。如果返回的类目不在包含的内容中，返回'明星单品'四字"
-        },
-        {
-            "role": "user",
-            "content": "三只松鼠"
-        }
-    ],
-    "temperature": 0.1
-}
-response = requests.post(url, headers=headers, json=payload)
-if response.status_code == 200:
-    data = response.json()
-    # 在这里处理返回的数据，可以根据需要提取具体的字段或执行相应的操作
-    print(data)
-else:
-    print("请求失败，错误码：", response.status_code)
+import pandas as pd
+import os
+import json
+
+path="F:/Working/PMAIP/xzt/negative_prompt.txt"
+folder_path="F:/Working/PMAIP/xzt//data_AI/txt"
+infile_contents = []#文件内容数组
+# 读取文件内容
+with open(path, 'r', encoding='utf-8') as file:
+    prompts = file.read()
+
+# 遍历文件夹中的所有文件
+for filename in os.listdir(folder_path):
+
+    # 构建完整的文件路径
+    file_path = os.path.join(folder_path, filename)
+    # 打开并读取文件内容
+    with open(file_path, 'r', encoding='utf-8') as file:
+        content = file.read()
+        # file_contents.append(content)
+
+    # 设置大模型请求参数
+    messages = [
+            {
+                "role": "system",
+                "content": prompts
+            },
+            {
+                "role": "user",
+                "content": content
+            }
+        ]
+    url = "https://aiapi.jinbizhihui.com:20000/v1/chat/completions"
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer your_token"
+    }
+    payload = {
+        "model": "cele/Cele-72B-Chat-GPTQ-Int4",
+        "messages":messages,
+        "temperature": 0.1
+    }
+
+    #将数据传入模型
+    response = requests.post(url, headers=headers, json=payload)
+    if response.status_code == 200:
+        data = response.json()
+        # 在这里处理返回的数据，可以根据需要提取具体的字段或执行相应的操作
+        # print(data["choices"][0]['message']['content'])
+
+        # 将JSON对象写入文件
+
+        infile_contents.append(data["choices"][0]['message']['content'])
+        if(len(infile_contents) == 3):
+            break
+    else:
+        print("请求失败，错误码：", response.status_code)
+
+# # 将所有结果保存到json中
+# sentiment_result = "why/datasets/sentiment_result.json"
+# with open(sentiment_result, 'w', encoding='utf-8') as file:
+#     # 确保JSON数据是格式化的，并且使用utf-8编码
+#     json.dump(infile_contents, file, ensure_ascii=False, indent=4)
+
+# 将所有结果保存到csv中
+df = pd.DataFrame(infile_contents)#格式转换
+df.to_csv('why/datasets/sentiment_result.csv',index=False,encoding='utf8')#不要索引号
