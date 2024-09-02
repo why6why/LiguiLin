@@ -52,8 +52,9 @@ for filename in os.listdir(folder_path):
         # 将JSON对象写入文件
 
         infile_contents.append(data["choices"][0]['message']['content'])
-        if(len(infile_contents) == 3):
-            break
+        # if(len(infile_contents) == 3):
+        #     break
+        print(len(infile_contents))
     else:
         print("请求失败，错误码：", response.status_code)
 
