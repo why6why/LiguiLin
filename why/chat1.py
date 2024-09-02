@@ -5,7 +5,7 @@ import json
 
 path="F:/Working/PMAIP/xzt/negative_prompt.txt"
 folder_path="F:/Working/PMAIP/xzt//data_AI/txt"
-infile_contents = []#文件内容数组
+infile_contents = []# 文件内容数组
 # 读取文件内容
 with open(path, 'r', encoding='utf-8') as file:
     prompts = file.read()
@@ -66,4 +66,4 @@ for filename in os.listdir(folder_path):
 
 # 将所有结果保存到csv中
 df = pd.DataFrame(infile_contents)#格式转换
-df.to_csv('why/datasets/sentiment_result.csv',index=False,encoding='utf8')#不要索引号
+df.to_csv('why/datasets/sentiment_result_n.csv',index=False,encoding='utf8')#不要索引号
