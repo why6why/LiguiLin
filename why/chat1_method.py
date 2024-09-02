@@ -15,10 +15,10 @@ with open(path, 'r', encoding='utf-8') as file:
     prompts = file.read()
 
 # 遍历文件夹中的所有文件
-for filename in os.listdir(folder_path):
-
+# for filename in os.listdir(folder_path):
+for i in range(1,30):
     # 构建完整的文件路径
-    file_path = os.path.join(folder_path, filename)
+    file_path = os.path.join(folder_path, 'slice_'+str(i)+'.txt')
     # 打开并读取文件内容
     print(file_path)
     with open(file_path, 'r', encoding='utf-8') as file:
@@ -73,4 +73,4 @@ for filename in os.listdir(folder_path):
 
 # 将所有结果保存到csv中
 df = pd.DataFrame(infile_contents)#格式转换
-df.to_csv('why/datasets/sentiment_result_n.csv',index=False,encoding='utf8')#不要索引号
+df.to_csv('why/datasets/sentiment_result.csv',index=False,encoding='utf8')#不要索引号
