@@ -1,4 +1,7 @@
-db_access    调用代码：调试中无法使用
-x-admin-web  前端代码：无bug，可使用
-chat1.py     调用智闻哥所给模型：可多次输出结果
+datasets数据集文件
+db_access备用资源
+x-admin-web备用资源
+chat1_method.py输入大模型代码
+chat_tocsv.py数据结果转换为Excel代码
 README.md
+you.py调试代码

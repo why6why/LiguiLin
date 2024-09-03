@@ -62,6 +62,7 @@ for i in range(1,30):
         print(len(infile_contents))
     else:
         print("end:",datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        infile_contents.append('null')
 
         print("请求失败，错误码：", response.status_code)
 
@@ -73,4 +74,4 @@ for i in range(1,30):
 
 # 将所有结果保存到csv中
 df = pd.DataFrame(infile_contents)#格式转换
-df.to_csv('why/datasets/sentiment_result.csv',index=False,encoding='utf8')#不要索引号
+df.to_csv('why/datasets/sentiment_result_negative.csv',index=False,encoding='utf8')#不要索引号
